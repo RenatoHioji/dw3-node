@@ -2,15 +2,16 @@ import express from "express"
 const router = express.Router()
 import MusicaService from "../services/MusicaService.js"
 
-router.get("/musica", function(req, res){
+router.get("/", function(req, res){
+    
     MusicaService.SelectAll().then((musicas) =>{
-        res.render("musicas", {
+
+        res.render("index", {
             musicas : musicas
         })
     })
 })
-
-router.post("/musicas/new", (req, res) => {
+router.post("/", (req, res) => {
     MusicaService.Create(
         req.body.nome,
         req.body.cpf,
@@ -19,13 +20,13 @@ router.post("/musicas/new", (req, res) => {
     res.redirect("/musicas")
 })
 
-router.get("/musicas/delete/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
     const id = req.params.id
     MusicaService.Delete(id)
     res.redirect("/musicas")
 })
 
-router.get("/musicas/edit/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     const id = req.params.id
     MusicaService.SelectOne(id).then((musica) => {
         res.render("MusicaEdit", {
@@ -44,4 +45,4 @@ router.post("/musicas/update/:id", (req, res) => {
     res.redirect("/musicas")
 })
 
-export default router 
+export default router
