@@ -1,48 +1,38 @@
 import express from "express"
-const router = express.Router()
 import MusicaService from "../services/MusicaService.js"
+const router = express.Router()
 
-router.get("/", function(req, res){
-    
-    MusicaService.SelectAll().then((musicas) =>{
+router.get("/",  async function(req, res){
+    const musicas = await MusicaService.SelectAll()
+    console.log("CONTROLLER- ", musicas)
 
-        res.render("index", {
-            musicas : musicas
-        })
-    })
-})
-router.post("/", (req, res) => {
+
+    console.log("render template")
+    res.render("index", {musicas: musicas})
+
+})  
+router.post("/musica", (req, res) => {
     MusicaService.Create(
         req.body.nome,
-        req.body.cpf,
-        req.body.endereco
+        req.body.url,
+        req.body.ano
     )
-    res.redirect("/musicas")
+    res.redirect("/")
 })
 
-router.delete("/:id", (req, res) => {
+router.get("/delete/:id", (req, res) => {
     const id = req.params.id
     MusicaService.Delete(id)
-    res.redirect("/musicas")
+    res.redirect("/")
 })
 
-router.get("/:id", (req, res) => {
+router.get("/update/:id", (req, res) => {
     const id = req.params.id
     MusicaService.SelectOne(id).then((musica) => {
         res.render("MusicaEdit", {
             musica : musica
         })
     })
-})
-
-router.post("/musicas/update/:id", (req, res) => {
-    MusicaService.Update(
-        req.body.id,
-        req.body.nome,
-        req.body.cpf,
-        req.body.endereco
-    )
-    res.redirect("/musicas")
 })
 
 export default router

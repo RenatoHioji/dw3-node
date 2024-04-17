@@ -5,5 +5,6 @@ const musica = new mongoose.Schema({
     url: String,
     ano: Number
 })
+const Musica = mongoose.model("Musicas", musica)
 
-export default musica
+export default Musica

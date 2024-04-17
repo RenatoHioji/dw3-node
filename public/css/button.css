@@ -1,0 +1,48 @@
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  
+  .delete-button, .update-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-button {
+    background-color: #ff5252;
+    color: white;
+  }
+  
+  .update-button {
+    background-color: #4285f4;
+    color: white;
+  }
+  
+  .delete-button:hover, .update-button:hover {
+    background-color: #ff1744;
+  }
+
+  .add-music-button {
+    display: flex;
+    justify-content: center;
+    vertical-align:middle;
+    width: 100%;
+    max-height: 15%;
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+  }
+  
+  .add-music-button:hover {
+    background-color: #45a049; /* Darker Green */
+  }

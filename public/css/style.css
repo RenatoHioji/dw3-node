@@ -20,3 +20,36 @@ th, td {
 footer {
     text-align: center;    
 }
+.container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.container-bottom {
+  margin-top: auto;
+}
+
+.music-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .music-item {
+    max-width: 70%;
+    max-height: 100%; 
+    overflow: hidden; 
+  }
+
+  .music-item img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    .music-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+

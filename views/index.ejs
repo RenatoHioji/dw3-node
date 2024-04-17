@@ -1,16 +1,31 @@
 <%- include ('partials/header.ejs') %>
 
-<div class="music-container">
-    <% for (let i = 0; i < musicas.length; i += 4) { %>
-      <div class="music-row">
-        <% for (let j = i; j < i + 4 && j < musicas.length; j++) { %>
-          <div class="music-item">
-            <h3><%= musicas[j].title %></h3>
-            <p><%= musicas[j].year %></p>
-          </div>
+<div class="container">
+    <div class="music-container">
+        <% if (musicas.length > 0) { %>
+            <% musicas.forEach(function(musica) { %>
+                <div class="music-item">
+                    <h3><%= musica.nome %></h3>
+                    <p><%= musica.ano %></p>
+                    <img src="<%= musica.url %>"> 
+                    <div class="button-container">
+                        <a href="/delete/<%= musica._id %>" class="delete-button"><i class="fas fa-trash"></i></a>
+                        <a href="/update/<%= musica._id %>" class="update-button"><i class="fas fa-edit"></i></a>
+                      </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>Sem músicas.</p>
         <% } %>
-      </div>
-    <% } %>
-  </div>
+        <div class ="container-bottom">
+            <form method="POST" action="/musica" >
+                <p>Está faltando alguma música? Adicione clicando abaixo:</p>
+                <input type="submit" class="add-music-button" value = "Adicionar Nova Musica">
+            </form>
+        </div>
+        
+    </div>
+    
+</div>
 
-  <%- include ("partials/footer.ejs") %>
+<%- include ("partials/footer.ejs") %>
