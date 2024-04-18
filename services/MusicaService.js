@@ -5,41 +5,28 @@ var exists = false
 class MusicaService {
     async SelectAll() {
         const musicas = await MusicaRepository.SelectAll();
-        console.log("SERVICE- " , musicas)
         return musicas
     }
 
     async Delete(id) {
         await MusicaRepository.findByIdAndDelete(id)
     }
-   /*
-    Create(nome, cpf, endereco) {
-        const novoMusica = new Musica({
-            nome : nome,
-            cpf : cpf,
-            endereco : endereco
-        })
-        novoMusica.save()
-    }
 
+    async Create(nome, url, ano) {
+
+        await MusicaRepository.Create(nome, `imgs/${url}`, ano)
+        return 
+    }
+    async Update(id, nome, url, ano) {
+        await MusicaRepository.Update(id, nome, url, ano)
+        return 
+    }
    
 
-    SelectOne(id){
-        const musica = Musica.findOne({_id : id})
+    async SelectOne(id){
+        const musica = await MusicaRepository.FindById(id)
         return musica
     }
-
-    Update(id, nome, cpf, endereco) {
-        Musica.findByIdAndUpdate(id, {
-            nome : nome,
-            cpf : cpf,
-            endereco : endereco
-        }).then(() => {
-            console.log(`Dados do Musica com id: ${id} alterados com sucesso!`)
-        }).catch(err => {
-            console.log(err)
-        })
-    }*/ 
 
     FirstInsert() {
         MusicaRepository.SelectAll().then(musicas => {

@@ -1,20 +1,40 @@
 import express from "express"
 import MusicaService from "../services/MusicaService.js"
+import multer from "multer"
 const router = express.Router()
 
-router.get("/",  async function(req, res){
-    const musicas = await MusicaService.SelectAll()
-    console.log("CONTROLLER- ", musicas)
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/imgs'); 
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
+const upload = multer({ storage: storage })
 
 
-    console.log("render template")
-    res.render("index", {musicas: musicas})
+router.get("/", function(req, res){
+    MusicaService.SelectAll().then((musicas) =>{
+        res.render("index", {
+            musicas : musicas
+        })
+    })
+})
 
-})  
-router.post("/musica", (req, res) => {
+router.get("/create", (req, res) => {
+    res.render("create")
+})
+
+
+router.post("/", upload.single('imagem'), (req, res) => {
+    if(!req.file){
+        res.status(400).send("BAD REQUEST IMAGEM NÃO INSERIDA")
+    }
     MusicaService.Create(
         req.body.nome,
-        req.body.url,
+        req.file.originalname,
         req.body.ano
     )
     res.redirect("/")
@@ -29,10 +49,24 @@ router.get("/delete/:id", (req, res) => {
 router.get("/update/:id", (req, res) => {
     const id = req.params.id
     MusicaService.SelectOne(id).then((musica) => {
-        res.render("MusicaEdit", {
+        res.render("update", {
             musica : musica
         })
     })
+})
+router.post("/update", upload.single('imagem'), (req, res) => {
+    if(!req.file){
+        var url = ""
+    }else{
+        var url = req.file.originalname
+    }
+    MusicaService.Update(
+        req.body.id,
+        req.body.nome,
+        url,
+        req.body.ano
+    )
+    res.redirect("/")
 })
 
 export default router

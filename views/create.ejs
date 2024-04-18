@@ -1,0 +1,26 @@
+<%- include ('partials/header.ejs') %>
+<div class="form-container">
+    <div class="form-title">Formulário de Upload</div>
+    <form method="POST" action="http://localhost:8080/" enctype="multipart/form-data">
+        <div>
+            <label for="nome">Nome da Música:</label><br>
+            <input type="text" name="nome" id="nome">
+        </div>
+        <div>
+            <label for="ano">Ano da Música:</label><br>
+            <input type="text" name="ano" id="ano">
+        </div>
+        <div class="file-input-container">
+            <label for="imagem">Upload da imagem:</label>
+            <input type="file" name="imagem" id="imagem">
+        </div>
+        <div class="button-container">
+            <input type="submit" value="Enviar">
+        </div>
+        <div class="button-container">
+            <a href="/" class ="return">Voltar</a>
+        </div>
+    </form>
+</div>
+
+<%- include ("partials/footer.ejs") %>

@@ -1,0 +1,31 @@
+<%- include ('partials/header.ejs') %>
+<div class="form-container">
+    <div class="form-title">Formulário de Atualização</div>
+    <form method="POST" action="http://localhost:8080/update" enctype="multipart/form-data">
+        <input type="hidden" id="id" name="id" value="<%= musica._id %>">
+        <input type="hidden" id="url" name="url" value="<%= musica.url %>">
+        <div>
+            <label for="nome">Nome da Música:</label><br>
+            <input type="text" name="nome" id="nome" value="<%= musica.nome %>">
+        </div>
+        <div>
+            <label for="ano">Ano da Música:</label><br>
+            <input type="text" name="ano" id="ano" value="<%= musica.ano %>">
+        </div>
+        <div class="file-input-container">
+            <img src="./../<%= musica.url %>"> 
+        </div>
+        <div class="file-input-container">
+            <label for="imagem">Upload da imagem:</label>
+            <input type="file" name="imagem" id="imagem">
+        </div>
+        <div class="button-container">
+            <input type="submit" value="Enviar">
+        </div>
+        <div class="button-container">
+            <a href="/" class ="return">Voltar</a>
+        </div>
+    </form>
+</div>
+
+<%- include ("partials/footer.ejs") %>

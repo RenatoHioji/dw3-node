@@ -7,6 +7,7 @@
                 <div class="music-item">
                     <h3><%= musica.nome %></h3>
                     <p><%= musica.ano %></p>
+                    
                     <img src="<%= musica.url %>"> 
                     <div class="button-container">
                         <a href="/delete/<%= musica._id %>" class="delete-button"><i class="fas fa-trash"></i></a>
@@ -17,15 +18,14 @@
         <% } else { %>
             <p>Sem músicas.</p>
         <% } %>
-        <div class ="container-bottom">
-            <form method="POST" action="/musica" >
-                <p>Está faltando alguma música? Adicione clicando abaixo:</p>
-                <input type="submit" class="add-music-button" value = "Adicionar Nova Musica">
-            </form>
-        </div>
         
     </div>
-    
-</div>
 
+</div>
+<div class ="container-bottom">
+  <form method="GET" action="/create" >
+      <p>Está faltando alguma música? Adicione clicando abaixo:</p>
+      <input type="submit" class="add-music-button" value = "Adicionar Nova Musica">
+  </form>
+</div>
 <%- include ("partials/footer.ejs") %>
